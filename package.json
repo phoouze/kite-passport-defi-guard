@@ -1,0 +1,19 @@
+{
+  "name": "kite-passport-defi-guard",
+  "version": "0.1.0",
+  "description": "DeFi intent decoder and policy authorization layer for Kite AI Passport.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "viem": "^2.37.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  },
+  "license": "MIT"
+}

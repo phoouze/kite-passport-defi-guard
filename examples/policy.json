@@ -1,0 +1,16 @@
+{
+  "allowedProtocols": ["erc20", "uniswap-v3"],
+  "allowedTokens": [
+    "0x1111111111111111111111111111111111111111",
+    "0x2222222222222222222222222222222222222222"
+  ],
+  "allowedTargets": [
+    "0x1111111111111111111111111111111111111111",
+    "0x4444444444444444444444444444444444444444"
+  ],
+  "allowedSpenders": ["0x2222222222222222222222222222222222222222"],
+  "allowedRecipients": ["0x3333333333333333333333333333333333333333"],
+  "denyUnlimitedApproval": true,
+  "requireNonZeroMinOutput": true,
+  "allowNativeValue": false
+}
