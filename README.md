@@ -30,6 +30,23 @@ The engine currently covers explicit rejection paths for:
 
 For supported intents it also produces an expected-result description and asset exposure changes before execution.
 
+## Risk assessment
+
+Preflight now includes a separate risk assessment layer in addition to the hard ALLOW/DENY policy decision. This is intentionally advisory: a transaction may be policy-compliant while still carrying elevated risk signals.
+
+Risk levels are `LOW`, `MEDIUM`, `HIGH`, and `CRITICAL`. Current signals include:
+
+- policy-denied transactions
+- unlimited approvals
+- approvals using at least 80% of the configured cap
+- unusually large uncapped approvals
+- swaps using at least 80% of the configured input cap
+- zero minimum output
+- swap deadlines longer than 30 minutes
+- transactions carrying native value
+
+This separation lets a Passport/agent enforce deterministic authorization rules while still surfacing context that may deserve user confirmation or additional controls.
+
 ## Architecture
 
 ```text

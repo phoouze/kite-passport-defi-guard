@@ -5,10 +5,12 @@ import type {
 } from "../types.js";
 import { decodeCalldata } from "../decoder/decodeCalldata.js";
 import { authorizeIntent } from "../policy/engine.js";
+import { assessRisk, type RiskAssessment } from "../risk.js";
 
 export interface PreflightReport {
   transaction: TransactionInput;
   authorization: AuthorizationResult;
+  risk: RiskAssessment;
   simulation: {
     performed: false;
     reason: string;
@@ -21,16 +23,20 @@ export function preflight(
   nowSeconds?: bigint
 ): PreflightReport {
   const intent = decodeCalldata(tx);
+  const resolvedNow = nowSeconds ?? BigInt(Math.floor(Date.now() / 1000));
   const authorization = authorizeIntent(
     intent,
     policy,
-    nowSeconds,
+    resolvedNow,
     tx.value ?? 0n
   );
+
+  const risk = assessRisk(intent, policy, authorization, resolvedNow, tx.value ?? 0n);
 
   return {
     transaction: tx,
     authorization,
+    risk,
     simulation: {
       performed: false,
       reason:
